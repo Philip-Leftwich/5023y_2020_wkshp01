@@ -1,5 +1,5 @@
 ---
-title: "Workshop 01 - Hello R!"
+title: "Week 1: Hello R!"
 output: 
   tufte::tufte_html:
     highlight: pygments
@@ -17,41 +17,47 @@ source("render_toc.R")
 ```
 
 
-```{r welcome, fig.margin = TRUE, echo = FALSE, fig.width=12}
+```{r welcome, fig.margin = TRUE, echo = FALSE, fig.width=15}
 knitr::include_graphics("img/r_first_then.png")
 ```
-`Make sure you read this whole document now, and complete all the instructions before the end of Friday - at the end of each week is a Blackboard quiz for you to complete.`
-`I will send reminders, but you must complete these every week`
 
-**Notes for Phil delete at end - embed videos, finish all exercises, proof!** At L402 so far. 
-
-The main goal of this week is to introduce you to R and RStudio^[[R](https://www.r-project.org/) is the name of the programming language itself and [RStudio](img/rstudio-ide.pdf) is a convenient interface.], which we will be using throughout the course in order to learn statistical concepts, bioinformatics & data visualisation.^[**Pro-tip**: these side-bars are full of extra info & hyperlinks to extra information!]
-
-An additional goal is to introduce you to git and GitHub^[[GitHub](https://www.youtube.com/watch?v=w3jLJU7DT5E) is a fantastic resource for data reproducibility and collaborative programming, check out this short (and very cheesy) intro video.], which is the collaboration and version control system that we will be using throughout the course. More on this later.
-
-By the end of this course you will have the tools to analyze real data and come to informed conclusions. 
-
-The taught content this autumn will be given to you in several **worksheets**, of which this is the first. Each worksheet covers one topic **module** and will be split into sections, and you should aim to complete one section per week. I will send you regular emails to remind you about this. Each section will comprise of a mini-lecture, some solo and group exercises and suggestions for further reading. 
-
-Our first module "Hello R!" is only one week long, but our next module "Welcome to the Tidyverse" will run across weeks 2 & 3.
+- **Make sure you read this whole document now, and complete all the solo instructions before our group session on Friday.**
+- **At the end of each week is a Blackboard quiz for you to complete - these have a deadline of midday Monday**
+- **I will send reminders, but you must complete these every week**
 
 ```{r toc, echo=FALSE}
 render_toc("wkshp01.Rmd")
 ```
 
+The main goal of this week is to introduce you to R and RStudio^[[R](https://www.r-project.org/). R is the name of the programming language itself and [RStudio](img/rstudio-ide.pdf) is a convenient interface.], which we will be using throughout the course in order to learn statistical concepts, bioinformatics & data visualisation.^[**Pro-tip**: these side-bars are full of extra info & hyperlinks to extra information!]
 
-# Week One^[In follow on weeks, our Tuesday lecture time will be 'flipped' a place to ask questions and review the previous week. Each week there will be short assignments and projects, some will be designed to completed solo, while others are designed to be collaborative and we can run in our Friday session]
+Eventually we will also add extra tools like GitHub^[[GitHub](https://www.youtube.com/watch?v=w3jLJU7DT5E) and Markdown which is a fantastic resource for data reproducibility and collaborative programming, check out this short (and very cheesy) intro video.], which are collaboration and version control systems that we will be using throughout the course. More on this in future weeks.
 
-We have **two** live events in week 1: 
+By the end of this module I hope you will have the tools to comfidently analyze real data, make informative and beautifual data visuals, and be able to analyse lots of different types of data.
 
-- Tuesdays 2PM (1 hour) - Introduction and questions about the course. I will give an overview of the course and introduce myself. Please fill out this survey form **before** the class.
+The taught content this autumn will be given to you in several **worksheets**, of which this is the first. Each worksheet covers one **topic** within the overall **module** and will be split into **sections**. You should aim to complete *one section per week*. I will send you regular emails to remind you about this. Each section will comprise of a mini-lecture, some solo and group exercises and suggestions for further reading. 
 
-- Fridays 2PM (2 hours) - Introducing yourself to R. Everything you need to complete this week's work is already in this worksheet, but on Friday we will host a live Blackboard Collaborate session to go through this together.    
+Our first topic "Hello R!" is only one week long, but in the future topics will run over several weeks.
+
+
+# Week One
+
+We have **two** live events in week 1^[In follow on weeks, our Tuesday lecture time will be 'flipped' a place to ask questions and review the previous week. Each week there will be short assignments and projects, some will be designed to completed solo, while others are designed to be collaborative and we can run in our Friday session]: 
+
+- Tuesday 2PM (1 hour) - Introduction and questions about the course. I will give an overview of the course and introduce myself. And we will run a simple Q&A.
+
+- Friday 2PM/3PM depending on your group (1 hour) - Introducing yourself to R. Everything you need to complete this week's work is already in this worksheet, but on Friday we will host a live Blackboard Collaborate session to go through this together. I have decided to split the class into two groups (A&B)^[Check Blackboard for your group - this doesn't show up on e-vision yet so make sure **you** know when to show up] so that these sessions are shorter, but so are the groups and we can interact more easily.    
 
 As the labs progress, you are encouraged to explore beyond what the labs dictate; a willingness to experiment, make mistakes, and share with others will make you a much better programmer. Before we get to that stage, however, you need to build some basic fluency in R. 
 
 ## 1.1 Aspirations
-We are going to start somewhere much more basic, but lets have a look at the sorts of visualisations you can create with R: 
+We are going to start somewhere basic like this...
+```{r examples}
+x <- 1+1
+x
+```
+
+And by the end of this course we will be able to do things like making beautiful graphics and fitting explanatory models to them
 
 ```{r penguin image, fig.margin = TRUE, fig.width=3, echo=FALSE}
 knitr::include_graphics("img/penguinbill.png")
@@ -90,31 +96,80 @@ bill_len_dep <- ggplot(data = penguins,
 bill_len_dep
 ```
 
-```{r, echo=FALSE, results='asis'}
+```{r, echo=TRUE, results='asis'}
 m <- lm(bill_length_mm~bill_depth_mm*species, data=penguins)
 extract_eq(m, wrap=TRUE)
 ```
 
+or process complex sequencing data and building microbiome community analyses
 
-The following screencast walks you through an explanation of how this was made - over the next few weeks you will learn how to generate visuals and models like those demonstrated here
+```{r fastq image, fig.margin = TRUE, fig.width=3, echo=FALSE, fig.cap="Raw FASTQ data from an Illumina MiSeq platform"}
+knitr::include_graphics("img/fastq.png")
+```
 
-<div style="position:relative;height:0;padding-bottom:40%"><iframe width="600" height="320" src="https://www.youtube.com/embed/8Ta_SJq3MrU" frameborder="0" allow="autoplay; encrypted-media" allowfullscreen></iframe></div>
+```{r microbiome figure, echo = FALSE, warning=FALSE, message=FALSE}
+knitr::include_graphics("img/Fig1 200520.png")
+```
+
 
 ## 1.2 Getting started
 Today however, we begin with the fundamentals. The building blocks of R and RStudio: the interface, how R works, and basic commands.
 
-- RStudio Cloud
-
-- Navigating the interface
-
+### Navigating RStudio
+<div style="position:relative;height:0;padding-bottom:40%"><iframe width="560" height="315" src="https://www.youtube.com/embed/8mWPwPBnAsY" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
 
-## 1.3 Individual Exercises - typing in commands in the R console
-###https://github.com/djnavarro/rbook/blob/master/bookdown/02.03-introR.Rmd
+### RStudio Cloud
+<div style="position:relative;height:0;padding-bottom:40%"><iframe width="560" height="315" src="https://www.youtube.com/embed/qoAKiru4_R8" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe></div>
 
-**Try these exercises on your own, and work at your own pace - the only goal is to have tried these before we meet on Friday**
+```{r error figure, echo = FALSE, warning=FALSE, message=FALSE, fig.margin = TRUE}
+knitr::include_graphics("img/Error.jpg")
+```
+## Error!
 
-One of the easiest things you can do with R is use it as a simple calculator, so it's a good place to start. For instance, try typing `10 + 20`, and hitting enter.^[Seriously, open up RStudio Cloud and start typing. The simple act of typing it rather than "just reading" makes a big difference. It makes the concepts more concrete, and it ties the abstract ideas (programming and statistics) to the actual context in which you need to use them. Statistics is something you *do*, not just something you read about in a textbook.] When you do this, you've entered a ***command***, and R will "execute" that command. What you see on screen now will be this:
+**Here are some of the most common error messages you’ll meet when you get started, and what they actually mean:**
+
+`Error in function-name(...): could not find function ‘function-name’ :` This probably means that you are trying to use a function from a package you have not loaded. Type ??function-name (or look it up online) to find out which package it comes from, and make sure the package is loaded using library(package-name). Which leads us to…
+
+`Error in library(package-name): there is no package called ‘package-name’.` : Did you install the package? Packages need to be installed once, using install.packages('packag-name'), after which they can be loaded with the library() command.
+
+`Error in function-name(): object ‘object-name’ not found:` R tells you that it cannot find an object that should be in your environment. First, make sure that you have an object with this name in your Environment panel. It could be just a typo, for instance you defined the object as birds_nests yet you try to plot it calling Bird_nests. (And yes, R is also case-sensitive!) Or it could be that you haven’t actually run the code which creates this object yet!
+
+`Error: unexpected symbol in ‘line-of-code’ :` Most likely you forgot (or had an extra!) comma, bracket or other punctuation sign somewhere.
+
+`Cannot open file ‘your-file-path’: No such file or directory:` R cannot find the file you are trying to load, often because you forgot to specify your working directory (we learned how to do it in our first tutorial, or because there is a mistake in your file path. (Hint: if you copied it from the Windows Explorer, you need to swap the backward slashes for forward slashes.) If you get object ‘your-file-path’ not found, then you probably forgot the quotation marks around the file path read.csv(file = 'my-file-path/file.csv').
+
+### Warning
+Errors are the scary red text, but often you might get `warnings` instead. these happen when the code has run successfully, but R wants you to be aware of something. Don't ignore these. It could be a specific warning telling you that R is ignoring some data in a plot (if it falls outside of the axis limits, or doesn't have a value), or that a function gave an unexpected result. You should make sure you understand what R is trying to warn you about and decide if something needs correcting
+
+```{r no-one flies solo, echo = FALSE, fig.height=15, fig.margin = TRUE}
+knitr::include_graphics("img/code_hero.jpg")
+```
+## Help! 
+Practice is the best way to get used to R, and make it less scary. 
+
+-  **Google**: make sure you put the whole error message in.
+
+-  Check your scripts against recipes e.g. Read [R4DS](https://r4ds.had.co.nz/)
+
+-  If you can't solve a problem, post in on our discussion board (Remember to post code and warnings). **Even** better if you *had* a problem but solved it, post there too! If you see problems posted you think you can solve - have a go. We work best as a community! 
+
+As we progress you can try asking online communites for help too:
+
+-  [Stack Overflow](https://t.co/E5HO42BcfH?amp=1)
+
+-  [RStudio Community](https://t.co/AVbShXNerG?amp=1)
+
+-  [Twitter](https://twitter.com/PhilipLeftwich) - there is a strong R community on Twitter. If you want to join I can signpost some accounts to follow
+
+
+## 1.3 Individual Exercises
+### typing in commands in the R console
+**Try these exercises on your own, and work at your own pace - the only goal is to have tried these before we meet on Friday - I estimate you will need about an hour to work through everything, but don't worry if it takes a little longer at first.**
+**Make notes as you go, and write down any questions you have/ sections you don't understand - these can be added to our discussion board on Blackboard**
+**Some questions will be signposted as for the Blackboard quiz, make sure you write these answers down so you can submit them later**
+
+One of the easiest things you can do with R is use it as a simple calculator, so it's a good place to start. For instance, try typing `10 + 20`, and hitting enter.^[Seriously, **open up RStudio Cloud** and start typing - you should work in your own workspace for this - you will need to start up a project, but then just start typing into the console. The simple act of typing it rather than "just reading" makes a big difference. It makes the concepts more concrete, and it ties the abstract ideas (programming and statistics) to the actual context in which you need to use them. Statistics is something you *do*, not just something you read about in a textbook.] When you do this, you've entered a ***command***, and R will "execute" that command. What you see on screen now will be this:
 
 ```{r eval=FALSE}
 > 10 + 20
@@ -142,7 +197,7 @@ So instead, I'm going to provide code in a slightly different format so that it 
 
 There are two main differences. 
 
-- In your console, you type after the >, but from now I won’t show the command prompt 
+In your console, you type after the >, but from now I won’t show the command prompt 
 
 This means that if you’re working with this html, you can easily copy code out of the book and into the console.
 
@@ -384,7 +439,7 @@ In this calculation, R has taken the old value of `fruit` and added 41 to that v
 - Variable names are case sensitive: that is, `Fruit` and `fruit` are *different* variable names.
 - Variable names cannot be one of the reserved keywords. These are special names that R needs to keep "safe" from us mere users, so you can't use them as the names of variables. The keywords are: `if`, `else`, `repeat`, `while`, `function`, `for`, `in`, `next`, `break`, `TRUE`, `FALSE`, `NULL`, `Inf`, `NaN`, `NA`, `NA_integer_`, `NA_real_`, `NA_complex_`, and finally,  `NA_character_`. Don't feel like you have to remember these: if you make a mistake and try to use one of the keywords as a variable name, R will complain about it like the whiny little automaton it is.
 
-```{r snake_case, fig.margin = TRUE, echo = FALSE}
+```{r snake_case, fig.margin = TRUE, echo = FALSE, fig.width=15}
 knitr::include_graphics("img/snake_case.jpg")
 ```
 
@@ -534,7 +589,22 @@ modules_names[3]
 
 ### Looking at the type of data in a vector
 
-So now we have looked at vectors that contain two different types of data `numeric` and `character`. There are more types, but for now let's look at how you check the data class of your vector
+So now we have looked at vectors that contain two different types of data `numeric` and `character`. 
+
+```{r class, echo=FALSE}
+knitr::kable(rbind(
+                    c("Numeric", "12.3, 5, 999"),
+                    c("Character", "'a','good', '23'" ),
+                    c("Logical", "TRUE, FALSE"),
+                    c("Factor", "'Male' (1), 'Female' (2)")
+),
+caption = 'Data classes and examples',col.names = c("Data Type", "Example"), align="lccc",
+  booktabs = TRUE)
+```
+
+
+
+For now let's look at how you check the data class of your vectors
 
 ```{r}
 class(module_names)
@@ -615,7 +685,7 @@ or this
 ```{r}
 sqrt(25) == 5
 ```
-Not only that, but as Table \@ref(tab:logicals) illustrates, there are several other logical operators that you can use, corresponding to some basic mathematical concepts. 
+Not only that, but as this Table illustrates, there are several other logical operators that you can use, corresponding to some basic mathematical concepts. 
 
 ```{r logicals, echo=FALSE}
 knitr::kable(rbind(
@@ -747,28 +817,19 @@ Again, that's exactly what we'd expect. However, what you need to keep in mind i
 "cat" == "c a t"
 ```
 
-## Quitting R
+### Quitting R
 
-There's one last thing I should cover in this chapter: how to quit R. When I say this, I'm not trying to imply that R is some kind of pathological addition and that you need to call the R QuitLine or wear patches to control the cravings (although you certainly might argue that there's something seriously pathological about being addicted to R). I just mean how to exit the program. Assuming you're running R in the usual way (i.e., through RStudio or the default GUI on a Windows or Mac computer), then you can just shut down the application in the normal way. However, R also has a function, called `q()` that you can use to quit, which is pretty handy if you're running R in a terminal window e.g. when using servers - we will cover some of this later in the course.
+There's one last thing I should cover in this chapter: how to quit R. When I say this, I'm not trying to imply that R is some kind of pathological addition and that you need to call the R QuitLine or wear patches to control the cravings (although you certainly might argue that there's something seriously pathological about being addicted to R). I just mean how to exit the program. Assuming you're running R in the usual way (i.e., through RStudio or the CLoud), then you can just shut down the application in the normal way by clicking the close windown button. However, R also has a function, called `q()` that you can use to quit, which is pretty handy if you're running R in a terminal window e.g. when using servers - we will cover some of this later in the course.
 
-Regardless of what method you use to quit R, when you do so for the first time R will probably ask you if you want to save the "workspace image". We'll talk a lot more about loading and saving data in Section \@ref(load), but I figured we'd better quickly cover this now otherwise you're going to get annoyed when you close R at the end of the chapter. If you're using RStudio, you'll see a dialog box that looks like the one shown in Figure \@ref(fig:quitR). If you're using a text based interface you'll see this:
-```{r eval=FALSE}
-q()
-## Save workspace image? [y/n/c]: 
-```
-The `y/n/c` part here is short for "yes / no / cancel". Type `y` if you want to save, `n` if you don't, and `c` if you've changed your mind and you don't want to quit after all. 
+Regardless of what method you use to quit R, when you do so for the first time R will probably ask you if you want to save the "workspace image". I talked about this in one of my videos, it's annoying and occasionally introduces complications, so if prompted it is usually better to click `NO` (but don't worry if you hit the wrong button). 
 
-What does this actually *mean*? What's going on is that R wants to know if you want to save all those variables that you've been creating, so that you can use them later. This sounds like a great idea, so it's really tempting to type `y` or click the "Save" button. To be honest though, I very rarely do this, and it kind of annoys me a little bit... what R is *really* asking is if you want it to store these variables in a "default" data file, which it will automatically reload for you next time you open R. And quite frankly, if I'd wanted to save the variables, then I'd have already saved them before trying to quit. Not only that, I'd have saved them to a location of *my* choice, so that I can find it again later. So I personally never bother with this. 
+What does this actually *mean*? What's going on is that R wants to know if you want to save **all** those variables that you've been creating, so that you can use them later. This sounds like a great idea, so it's really tempting to type `y` or click the "Save" button. To be honest though, I very rarely do this, and it kind of annoys me a little bit... what R is *really* asking is if you want it to store these variables in a "default" data file (R.data), which it will automatically reload for you next time you open R. But as we will learn to work with scripts, this is unnecessary. 
 
 In fact, every time I install R on a new machine one of the first things I do is change the settings so that it never asks me again. You can do this in RStudio really easily: use the menu system to find the RStudio option; the dialog box that comes up will give you an option to tell R never to whine about this again.
 
-```{r no-one flies solo, fig.margin = TRUE, echo = FALSE, fig.width=12}
-knitr::include_graphics("img/code_hero.jpg")
-```
+## Group Exercise One
 
-## Group Exercise One^[Working with others, sharing problems & solutions with talking and code sharing is the fastest way to get better we will have a space to post problems everyone should be participating as much as they can, not just in our 'live' sessions]
-
-This workshop is designed to be run in small groups, where you are encouraged to talk with each other and discuss your observations. However, all of the materials you need to complete this are here, so don't worry if you can't make the live session (or simply want to go over it again in your own time). 
+Reminder the workshop runs on Friday afternoons (come to the right group for you!)  - you will need to join a Collaborate session and logon to RStudio Cloud^[Working with others, sharing problems & solutions with talking and code sharing is the fastest way to get better we will have a space to post problems and everyone should participate as much as they can. Not just in our 'live' sessions] is designed to be run in small groups, where you are encouraged to talk with each other and discuss your observations. However, all of the materials you need to complete this are available as an assignment on RStudio Cloud, so don't worry if you can't make the live session (or simply want to go over it again in your own time). 
 
 
 
